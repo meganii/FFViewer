@@ -71,9 +71,9 @@ class FFViewer : NSObject {
             post.content = text
             post.filename = filename
             
-            let cells = str.componentsSeparatedByString("\n")
-            for cell in cells {
-                var keyVal = cell.componentsSeparatedByString(":")
+            let yamlElements = str.componentsSeparatedByString("\n")
+            for element in yamlElements {
+                var keyVal = element.componentsSeparatedByString(":")
                 if keyVal.count > 1 {
                     post.prop[(keyVal[0] as String)] = (keyVal[1] as String)
                 }
