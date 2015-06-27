@@ -13,20 +13,52 @@ class FFViewer : NSObject {
     let sourcePath = "/Users/meganii/Work/MacOSXApplication/doc"
     let outputPath = "/Users/meganii/Work/MacOSXApplication/replaceDoc/"
     
-    let ffTag = "---\n"
-    
     func output (posts : [Post]) {
         print("output")
+        
         for post in posts {
-            
-            var frontformatter = ffTag
-            let keys: Array = Array(post.prop.keys)
-            for key in keys {
-                frontformatter += key + ": " + post.prop[key]! + "\n"
-            }
-            frontformatter += ffTag
-            File.write(outputPath + post.filename, content: frontformatter + post.content)
+            var yaml = createYAML(post.prop)
+            File.write(outputPath + post.filename, content: yaml + post.content)
         }
+    }
+    
+    func createYAML(dic: Dictionary<String, String>) -> String {
+        var yaml = "---\n"
+        
+        if dic["layout"] != nil {
+            yaml += "layout: " + dic["layout"]! + "\n"
+        }
+        
+        if dic["title"] != nil {
+            yaml += "title: " + dic["title"]! + "\n"
+        }
+        
+        if dic["date"] != nil {
+            yaml += "date: " + dic["date"]! + "\n"
+        }
+        
+        if dic["comments"] != nil {
+            yaml += "comments: " + dic["comments"]! + "\n"
+        }
+        
+        if dic["category"] != nil {
+            yaml += "category: " + dic["category"]! + "\n"
+        }
+        
+        if dic["tags"] != nil {
+            yaml += "tags: " + dic["tags"]! + "\n"
+        }
+        
+        if dic["published"] != nil {
+            yaml += "published: " + dic["published"]! + "\n"
+        }
+        
+        if dic["img"] != nil {
+            yaml += "img: " + dic["img"]! + "\n"
+        }
+        
+        yaml += "---\n"
+        return yaml
     }
     
     func load() -> [Post] {
@@ -75,7 +107,8 @@ class FFViewer : NSObject {
             for element in yamlElements {
                 var keyVal = element.componentsSeparatedByString(":")
                 if keyVal.count > 1 {
-                    post.prop[(keyVal[0] as String)] = (keyVal[1] as String)
+                    var value = ltrim(element.substringFromIndex(keyVal[0].length+1))
+                    post.prop[(keyVal[0] as String)] = value
                 }
             }
             
@@ -84,4 +117,29 @@ class FFViewer : NSObject {
         
         return posts
     }
+    
+    func ltrim(string: NSString) -> String {
+        var str = string.copy() as NSString
+        if str.length == 0 {
+            return str
+        }
+        
+        while isStartWithEmpty(str) {
+            str = str.substringFromIndex(1)
+        }
+        return str as String;
+    }
+    
+    func isStartWithEmpty(str: NSString) -> Bool {
+        if str.length == 0 {
+            return false
+        }
+        
+        if str.substringToIndex(1) == " " {
+            return true
+        }
+        
+        return false
+    }
+
 }
