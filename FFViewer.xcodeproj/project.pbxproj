@@ -11,6 +11,9 @@
 		5674019D1B3E2E5300E476C4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5674019C1B3E2E5300E476C4 /* Images.xcassets */; };
 		567401A01B3E2E5300E476C4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5674019E1B3E2E5300E476C4 /* MainMenu.xib */; };
 		567401AC1B3E2E5300E476C4 /* FFViewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567401AB1B3E2E5300E476C4 /* FFViewerTests.swift */; };
+		567401B61B3E301E00E476C4 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567401B51B3E301E00E476C4 /* File.swift */; };
+		567401B81B3E30CA00E476C4 /* FFViewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567401B71B3E30CA00E476C4 /* FFViewer.swift */; };
+		567401BA1B3E310D00E476C4 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567401B91B3E310D00E476C4 /* Post.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +35,9 @@
 		567401A51B3E2E5300E476C4 /* FFViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FFViewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		567401AA1B3E2E5300E476C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		567401AB1B3E2E5300E476C4 /* FFViewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFViewerTests.swift; sourceTree = "<group>"; };
+		567401B51B3E301E00E476C4 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		567401B71B3E30CA00E476C4 /* FFViewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FFViewer.swift; sourceTree = "<group>"; };
+		567401B91B3E310D00E476C4 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +80,12 @@
 			isa = PBXGroup;
 			children = (
 				5674019A1B3E2E5300E476C4 /* AppDelegate.swift */,
+				567401B71B3E30CA00E476C4 /* FFViewer.swift */,
 				5674019C1B3E2E5300E476C4 /* Images.xcassets */,
 				5674019E1B3E2E5300E476C4 /* MainMenu.xib */,
 				567401981B3E2E5300E476C4 /* Supporting Files */,
+				567401B51B3E301E00E476C4 /* File.swift */,
+				567401B91B3E310D00E476C4 /* Post.swift */,
 			);
 			path = FFViewer;
 			sourceTree = "<group>";
@@ -205,7 +214,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				567401B81B3E30CA00E476C4 /* FFViewer.swift in Sources */,
 				5674019B1B3E2E5300E476C4 /* AppDelegate.swift in Sources */,
+				567401B61B3E301E00E476C4 /* File.swift in Sources */,
+				567401BA1B3E310D00E476C4 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +405,7 @@
 				567401B11B3E2E5300E476C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		567401B21B3E2E5300E476C4 /* Build configuration list for PBXNativeTarget "FFViewerTests" */ = {
 			isa = XCConfigurationList;
@@ -401,6 +414,7 @@
 				567401B41B3E2E5300E476C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
