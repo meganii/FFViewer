@@ -10,17 +10,22 @@ import Cocoa
 
 class FFViewer : NSObject {
     
+    let sourcePath = "/Users/meganii/Work/MacOSXApplication/doc"
+    let outputPath = "/Users/meganii/Work/MacOSXApplication/replaceDoc/"
+    
+    let ffTag = "---\n"
+    
     func output (posts : [Post]) {
         print("output")
         for post in posts {
             
-            var frontformatter = "--\n"
+            var frontformatter = ffTag
             let keys: Array = Array(post.prop.keys)
             for key in keys {
                 frontformatter += key + ": " + post.prop[key]! + "\n"
             }
-            frontformatter += "---\n"
-            File.write("/Users/meganii/Work/MacOSXApplication/replaceDoc/" + post.filename, content: frontformatter + post.content)
+            frontformatter += ffTag
+            File.write(outputPath + post.filename, content: frontformatter + post.content)
         }
     }
     
@@ -28,11 +33,10 @@ class FFViewer : NSObject {
         
         var posts: [Post] = []
         
-        let documentsPath = "/Users/meganii/Work/MacOSXApplication/doc"
         
         // filemaneger
         let fileManager = NSFileManager.defaultManager()
-        let contents = fileManager.contentsOfDirectoryAtPath(documentsPath, error: nil)!
+        let contents = fileManager.contentsOfDirectoryAtPath(sourcePath, error: nil)!
         
         
         let pattern = "---"
@@ -52,7 +56,7 @@ class FFViewer : NSObject {
                 continue
             }
 
-            var content: NSString = NSString(contentsOfFile: documentsPath.stringByAppendingPathComponent(filename), encoding: NSUTF8StringEncoding, error: nil)!
+            var content: NSString = NSString(contentsOfFile: sourcePath.stringByAppendingPathComponent(filename), encoding: NSUTF8StringEncoding, error: nil)!
             
             let regex = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: nil)
             var matches=regex?.matchesInString(content, options: nil, range:NSMakeRange(0,  content.length)) as Array<NSTextCheckingResult>
