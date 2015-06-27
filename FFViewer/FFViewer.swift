@@ -13,7 +13,14 @@ class FFViewer : NSObject {
     func output (posts : [Post]) {
         print("output")
         for post in posts {
-            File.write("/Users/meganii/Work/MacOSXApplication/replaceDoc/" + post.filename, content: post.content)
+            
+            var frontformatter = "--\n"
+            let keys: Array = Array(post.prop.keys)
+            for key in keys {
+                frontformatter += key + ": " + post.prop[key]! + "\n"
+            }
+            frontformatter += "---\n"
+            File.write("/Users/meganii/Work/MacOSXApplication/replaceDoc/" + post.filename, content: frontformatter + post.content)
         }
     }
     
@@ -36,16 +43,11 @@ class FFViewer : NSObject {
             if file as String == ".DS_Store" {
                 continue
             }
-            println(file)
 
             var content: NSString = NSString(contentsOfFile: documentsPath.stringByAppendingPathComponent(file as String), encoding: NSUTF8StringEncoding, error: nil)!
             
-            //            print(content)
-            
             let regex = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: nil)
             var matches=regex?.matchesInString(content, options: nil, range:NSMakeRange(0,  content.length)) as Array<NSTextCheckingResult>
-            
-            //            println(matches)
             
             // Extract Frontmatter
             var str = content.substringFromIndex(matches[0].range.length + 1 ) as NSString
@@ -60,7 +62,6 @@ class FFViewer : NSObject {
             let cells = str.componentsSeparatedByString("\n")
             for cell in cells {
                 var keyVal = cell.componentsSeparatedByString(":")
-                //                print(keyVal)
                 if keyVal.count > 1 {
                     post.prop[(keyVal[0] as String)] = (keyVal[1] as String)
                 }
