@@ -24,9 +24,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
         data = ffviewer.load()
-        for dat in data {
-            println(dat.prop)
-        }
         postTable.reloadData()
     }
 
@@ -43,6 +40,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
             return data[row].prop[tc.identifier]
         }
         return ""
+    }
+    
+    func tableView(tableView: NSTableView,
+        sortDescriptorsDidChange oldDescriptors: [AnyObject])  {
+            
+            // Apply each sort descriptor, in reverse order
+            
+            for sortDescriptor in tableView.sortDescriptors.reverse() as [NSSortDescriptor] {
+                var key = sortDescriptor.key() as String!
+                if sortDescriptor.ascending {
+                    data.sort {(item1, item2) in return item1.prop[key] < item2.prop[key]}
+                } else {
+                    data.sort {(item1, item2) in return item1.prop[key] > item2.prop[key]}
+                }
+
+            }
+            
+            tableView.reloadData()
     }
 }
 
