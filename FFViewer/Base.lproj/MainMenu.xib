@@ -671,30 +671,19 @@
         <window title="FFViewer" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="916" height="740"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="contentRect" x="335" y="390" width="1126" height="782"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="916" height="740"/>
+                <rect key="frame" x="0.0" y="0.0" width="1126" height="782"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uTx-bw-BtN">
-                        <rect key="frame" x="809" y="661" width="85" height="32"/>
-                        <buttonCell key="cell" type="push" title="Output" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MVS-HV-P5M">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="outputPushed:" target="Voe-Tx-rLC" id="3a5-n9-odP"/>
-                        </connections>
-                    </button>
                     <scrollView fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRo-Rr-7K1">
-                        <rect key="frame" x="48" y="60" width="840" height="588"/>
+                        <rect key="frame" x="48" y="102" width="1058" height="588"/>
                         <clipView key="contentView" misplaced="YES" id="ODf-iG-IrO">
                             <rect key="frame" x="1" y="17" width="238" height="117"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="2Ma-Ma-NPM" viewBased="YES" id="iGH-bR-C7v">
-                                    <rect key="frame" x="0.0" y="0.0" width="238" height="117"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -725,6 +714,7 @@
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="title"/>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         </tableColumn>
                                         <tableColumn identifier="category" width="64" minWidth="10" maxWidth="3.4028234663852886e+38" id="8IK-93-m3E">
@@ -738,9 +728,10 @@
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="category"/>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         </tableColumn>
-                                        <tableColumn identifier="tags" width="64" minWidth="10" maxWidth="3.4028234663852886e+38" id="eWJ-Fk-s5K">
+                                        <tableColumn identifier="tags" width="148" minWidth="10" maxWidth="3.4028234663852886e+38" id="eWJ-Fk-s5K">
                                             <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left" title="tags">
                                                 <font key="font" metaFont="smallSystem"/>
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -751,6 +742,7 @@
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
+                                            <sortDescriptor key="sortDescriptorPrototype" selector="compare:" sortKey="tags"/>
                                             <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         </tableColumn>
                                     </tableColumns>
@@ -762,8 +754,8 @@
                             </subviews>
                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" doubleValue="0.011194029850746268" horizontal="YES" id="Ca5-j5-Lbf">
-                            <rect key="frame" x="1" y="117.9022513628006" width="237.78427886962891" height="16"/>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Ca5-j5-Lbf">
+                            <rect key="frame" x="1" y="117.9022513628006" width="238" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="LAw-kJ-ylC">
@@ -775,9 +767,19 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uTx-bw-BtN">
+                        <rect key="frame" x="1032" y="703" width="85" height="32"/>
+                        <buttonCell key="cell" type="push" title="Output" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MVS-HV-P5M">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="outputPushed:" target="Voe-Tx-rLC" id="3a5-n9-odP"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="463" y="493"/>
+            <point key="canvasLocation" x="568" y="514"/>
         </window>
         <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="QV7-Rr-Y9v">
             <rect key="frame" x="0.0" y="0.0" width="240" height="135"/>
