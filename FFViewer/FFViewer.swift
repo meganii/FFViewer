@@ -40,11 +40,19 @@ class FFViewer : NSObject {
         
         
         for file in contents {
-            if file as String == ".DS_Store" {
+            var filename = file as NSString
+            
+            // exclude .DS_Store
+            if filename == ".DS_Store" {
                 continue
             }
 
-            var content: NSString = NSString(contentsOfFile: documentsPath.stringByAppendingPathComponent(file as String), encoding: NSUTF8StringEncoding, error: nil)!
+            // exclude vim backup files
+            if filename.substringFromIndex(filename.length-1) == "~" {
+                continue
+            }
+
+            var content: NSString = NSString(contentsOfFile: documentsPath.stringByAppendingPathComponent(filename), encoding: NSUTF8StringEncoding, error: nil)!
             
             let regex = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: nil)
             var matches=regex?.matchesInString(content, options: nil, range:NSMakeRange(0,  content.length)) as Array<NSTextCheckingResult>
@@ -57,7 +65,7 @@ class FFViewer : NSObject {
             var post = Post()
             var text = content.substringFromIndex(matches[1].range.location + 4)
             post.content = text
-            post.filename = file as String
+            post.filename = filename
             
             let cells = str.componentsSeparatedByString("\n")
             for cell in cells {

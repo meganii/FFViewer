@@ -44,9 +44,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
     
     func tableView(tableView: NSTableView,
         sortDescriptorsDidChange oldDescriptors: [AnyObject])  {
-            
-            // Apply each sort descriptor, in reverse order
-            
             for sortDescriptor in tableView.sortDescriptors.reverse() as [NSSortDescriptor] {
                 var key = sortDescriptor.key() as String!
                 if sortDescriptor.ascending {
@@ -54,10 +51,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
                 } else {
                     data.sort {(item1, item2) in return item1.prop[key] > item2.prop[key]}
                 }
-
             }
-            
-            tableView.reloadData()
+        tableView.reloadData()
     }
+    
+    func tableView(tableView: NSTableView, setObjectValue anObject: AnyObject?, forTableColumn aTableColumn: NSTableColumn?, row  rowIndex: Int) -> AnyObject! {
+        let tc: NSTableColumn = aTableColumn!
+        data[rowIndex].prop[tc.identifier] = anObject as? String
+        return data[rowIndex].prop[tc.identifier]
+    }
+    
+
 }
 
