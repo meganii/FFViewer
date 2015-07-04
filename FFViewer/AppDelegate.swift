@@ -13,6 +13,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
 
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var postTable: NSTableView!
+    @IBOutlet weak var postCounts: NSTextField!
 
     var data: [Post] = []
     var ffviewer: FFViewer = FFViewer()
@@ -24,6 +25,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
         data = ffviewer.load()
+        postCounts.integerValue = data.count
         postTable.reloadData()
     }
 
