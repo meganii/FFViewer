@@ -14,12 +14,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
     @IBOutlet weak var window: NSWindow!
     @IBOutlet weak var postTable: NSTableView!
     @IBOutlet weak var postCounts: NSTextField!
+    
+    @IBOutlet weak var beforeText: NSTextField!
+    @IBOutlet weak var afterText: NSTextField!
 
     var data: [Post] = []
     var ffviewer: FFViewer = FFViewer()
 
     @IBAction func outputPushed(sender: AnyObject) {
         ffviewer.output(data)
+    }
+    
+    @IBAction func replacePushed(sender: AnyObject) {
+        ffviewer.replace(data, before: beforeText.stringValue, after: afterText.stringValue)
+        postTable.reloadData()
     }
     
     func applicationDidFinishLaunching(aNotification: NSNotification) {

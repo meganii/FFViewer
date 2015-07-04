@@ -141,5 +141,16 @@ class FFViewer : NSObject {
         
         return false
     }
+    
+    func replace(posts: [Post], before: String, after: String) -> [Post] {
+    
+        for post in posts {
+            if post.prop["category"] == before {
+                post.prop["category"] = after
+            }
+        }
+        
+        return posts
+    }
 
 }
