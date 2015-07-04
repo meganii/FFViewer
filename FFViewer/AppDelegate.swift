@@ -31,11 +31,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
         // Insert code here to tear down your application
     }
     
-    func numberOfRowsInTableView(tableView: NSTableView!) -> Int {
+    func numberOfRowsInTableView(tableView: NSTableView) -> Int {
         return data.count
     }
     
-    func tableView(tableView: NSTableView!, objectValueForTableColumn tableColumn: NSTableColumn!, row: Int) -> AnyObject! {
+    func tableView(tableView: NSTableView, objectValueForTableColumn tableColumn: NSTableColumn?, row: Int) -> AnyObject? {
         if let tc: NSTableColumn = tableColumn {
             return data[row].prop[tc.identifier]
         }
@@ -44,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
     
     func tableView(tableView: NSTableView,
         sortDescriptorsDidChange oldDescriptors: [AnyObject])  {
-            for sortDescriptor in tableView.sortDescriptors.reverse() as [NSSortDescriptor] {
+            for sortDescriptor in tableView.sortDescriptors.reverse() as! [NSSortDescriptor] {
                 var key = sortDescriptor.key() as String!
                 if sortDescriptor.ascending {
                     data.sort {(item1, item2) in return item1.prop[key] < item2.prop[key]}
@@ -55,12 +55,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTableViewDataSource, NSTab
         tableView.reloadData()
     }
     
-    func tableView(tableView: NSTableView, setObjectValue anObject: AnyObject?, forTableColumn aTableColumn: NSTableColumn?, row  rowIndex: Int) -> AnyObject! {
-        let tc: NSTableColumn = aTableColumn!
-        data[rowIndex].prop[tc.identifier] = anObject as? String
-        return data[rowIndex].prop[tc.identifier]
+
+    func tableView(tableView: NSTableView, setObjectValue object: AnyObject?, forTableColumn tableColumn: NSTableColumn?, row: Int) {
+        let tc: NSTableColumn = tableColumn!
+        data[row].prop[tc.identifier] = object as? String
     }
-    
 
 }
 

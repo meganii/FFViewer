@@ -76,7 +76,7 @@ class FFViewer : NSObject {
         
         
         for file in contents {
-            var filename = file as NSString
+            var filename = file as! NSString
             
             // exclude .DS_Store
             if filename == ".DS_Store" {
@@ -88,10 +88,10 @@ class FFViewer : NSObject {
                 continue
             }
 
-            var content: NSString = NSString(contentsOfFile: sourcePath.stringByAppendingPathComponent(filename), encoding: NSUTF8StringEncoding, error: nil)!
+            var content: NSString = NSString(contentsOfFile: sourcePath.stringByAppendingPathComponent(filename as String), encoding: NSUTF8StringEncoding, error: nil)!
             
             let regex = NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive, error: nil)
-            var matches=regex?.matchesInString(content, options: nil, range:NSMakeRange(0,  content.length)) as Array<NSTextCheckingResult>
+            var matches=regex?.matchesInString(content as String, options: nil, range:NSMakeRange(0,  content.length)) as! Array<NSTextCheckingResult>
             
             // Extract Frontmatter
             var str = content.substringFromIndex(matches[0].range.length + 1 ) as NSString
@@ -101,14 +101,14 @@ class FFViewer : NSObject {
             var post = Post()
             var text = content.substringFromIndex(matches[1].range.location + 4)
             post.content = text
-            post.filename = filename
+            post.filename = filename as String
             
             let yamlElements = str.componentsSeparatedByString("\n")
             for element in yamlElements {
                 var keyVal = element.componentsSeparatedByString(":")
                 if keyVal.count > 1 {
                     var value = ltrim(element.substringFromIndex(keyVal[0].length+1))
-                    post.prop[(keyVal[0] as String)] = value
+                    post.prop[(keyVal[0] as! String)] = value
                 }
             }
             
@@ -119,9 +119,9 @@ class FFViewer : NSObject {
     }
     
     func ltrim(string: NSString) -> String {
-        var str = string.copy() as NSString
+        var str = string.copy() as! NSString
         if str.length == 0 {
-            return str
+            return str as String
         }
         
         while isStartWithEmpty(str) {
